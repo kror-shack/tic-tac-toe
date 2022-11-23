@@ -1,0 +1,53 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+div{
+    border: 2px solid black;
+}
+
+.header{
+    height: 15vh;
+    text-align: center;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80vh;
+    align-items: center;
+    gap: 40px;
+}
+
+.footer{
+    height: 5vh;
+    text-align: center;
+}
+
+.body-buttons{
+    display: flex;
+    gap: 150px;
+    border: none;
+}
+
+.body-grid{
+    display: grid;
+    height: fit-content;
+    width: fit-content;
+    grid-template-columns: repeat(3, minmax(100px, 150px));
+    grid-template-rows: repeat(3, minmax(100px, 150px));
+    
+}
+
+.body-grid-box:hover{
+    background-color: beige;
+}
+
+.body-grid-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
