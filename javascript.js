@@ -1,19 +1,11 @@
 const gridCells = document.getElementsByClassName("body-grid-box");
 let playerOne = true;
-let gridOne = "";
-let gridTwo = "";
-let gridThree = "";
-let gridFour = "";
-let gridFive = "";
-let gridSix = "";
-let gridSeven = "";
-let gridEight = "";
-let gridNine = "";
+let gameOver = false;
 
 
 
 function selectBoxDemo(){
-  if(playerOne === true){
+  if(playerOne === true && gameOver === false){
     let iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     let iconPath = document.createElementNS(
       'http://www.w3.org/2000/svg',
@@ -34,8 +26,11 @@ function selectBoxDemo(){
     this.setAttribute("data-index","cross")
     console.log(this.getAttribute("data-index"));
     playerOne = false;
+    degId();
+    threeRow();
   }
-  else if(playerOne === false){
+
+  else if(playerOne === false && gameOver === false){
     let iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     let iconPath = document.createElementNS(
       'http://www.w3.org/2000/svg',
@@ -54,9 +49,11 @@ function selectBoxDemo(){
     
     this.setAttribute("data-index","tick")
     playerOne = true;
+    degId();
+    threeRow();
   }
-  degId();
-  threeRow();
+
+
 }
 
 function changePlayer(){
@@ -85,18 +82,52 @@ function degId(){
       cell.id = "tick";
     }
   }
-
 }
 
 function threeRow(){
-  console.log("Three function")
-  if(gridCells[0].id == "cross" && gridCells[1].id == "cross" && gridCells[2].id == "cross"){
-    console.log("three inner function")
-    alert("player One has won!")
+  if(gridCells[0].id == "cross" && gridCells[4].id == "cross" && gridCells[8].id == "cross"){
+    playerOneWin();
+  }
+  else if(gridCells[2].id == "cross" && gridCells[4].id == "cross" && gridCells[6].id == "cross"){
+    playerOneWin();
+  }
+  else if(gridCells[0].id == "tick" && gridCells[4].id == "tick" && gridCells[8].id == "tick"){
+    playerTwoWin();
+  }
+  else if(gridCells[2].id == "tick" && gridCells[4].id == "tick" && gridCells[6].id == "tick"){
+    playerTwoWin()
+  }
+  
+  for(let i=0; i < gridCells.length; i++){
+    if(i == 0 || i == 3 || i == 6){
+      if(gridCells[i].id == "tick" && gridCells[i+1].id == "tick" && gridCells[i+2].id == "tick"){
+        playerTwoWin();
+      }
+      else if (gridCells[i].id == "cross" && gridCells[i+1].id == "cross" && gridCells[i+2].id == "cross"){
+        playerOneWin();
+      }
+    }
+  }
+  for(let i=0; i < gridCells.length; i++){
+    if(i <= 2){
+      if(gridCells[i].id == "tick" && gridCells[i+3].id == "tick" && gridCells[i+6].id == "tick"){
+        playerTwoWin();
+      }
+      else if (gridCells[i].id == "cross" && gridCells[i+3].id == "cross" && gridCells[i+6].id == "cross"){
+        playerOneWin();
+      }
+    }
   }
 }
 
-console.log(gridCells);
-console.log(gridCells[1].id);
+function playerOneWin(){
+  console.log("player One Wins!");
+  gameOver = true;
+}
+
+function playerTwoWin(){
+  console.log("player Two Wins!")
+  gameOver = true;
+}
 
 
